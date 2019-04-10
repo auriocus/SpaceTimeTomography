@@ -6,8 +6,10 @@
 #define cimg_use_tiff
 #define cimg_use_tif
 #include "CImg.h"
-#include"linear_solver.h"
+#include <linear_solver.h>
 namespace cl = cimg_library;
+typedef cl::CImg<float>		image;
+typedef CImgList<float>  imagelist;
 namespace ls = linear_solver;
 #include<vec3.h>
 #include<options.h>
@@ -110,7 +112,7 @@ namespace optical_flow {
 		int gradientConstancy = 0;
 	
 		const int nPx = (int)(dim[0] * dim[1] * dim[2]);
-		cout << "nPX" << nPx << endl;
+		std::cout << "nPX" << nPx << std::endl;
 		
 
 		float* v1 = new float[nPx];
@@ -245,7 +247,7 @@ namespace optical_flow {
 				}
 			}
 		}
-		cout << "Finish the initialization, open clock " << endl;
+		std::cout << "Finish the initialization, open clock " << std::endl;
 		clock_t begin = clock();
 		//do k warpings
 		for (int idxwarp = 0; idxwarp < numberOfWarps; ++idxwarp)
@@ -504,7 +506,7 @@ namespace optical_flow {
 				if (iterations % 1000 == 0)
 				{
 
-					cout << "Iteration: " << iterations << " Residual " << err << endl;
+					std::cout << "Iteration: " << iterations << " Residual " << err << std::endl;
 
 					//mexPrintf("Iteration %d,Residual %e\n", iterations, err);
 					//mexEvalString("drawnow;");
@@ -546,11 +548,11 @@ namespace optical_flow {
 
 			}
 		}
-		cout << " in the L1TVOpticalFlowNonlinear  5 " << endl;
+		std::cout << " in the L1TVOpticalFlowNonlinear  5 " << std::endl;
 
 		clock_t end = clock();
 		double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-		cout << "=========Total time is :" << elapsed_secs << " s ======" << endl;
+		std::cout << "=========Total time is :" << elapsed_secs << " s ======" << std::endl;
 		int num1 = _inputV.width();
 		int num2 = _inputV.height();
 		int num3 = _inputV.depth();
@@ -693,13 +695,13 @@ namespace optical_flow {
 	for (int iscale = 0; iscale < inputVs.size(); iscale++)
 		{
 			int levels = inputVs.size() - iscale;
-			cout << "At levels " << levels << endl;
+			std::cout << "At levels " << levels << std::endl;
 			int _dim[] = { Im1s[iscale].width(),Im1s[iscale].height(),Im1s[iscale].depth() };
-			cout << "_dim[]  :" << _dim[0] << " " << _dim[1] << " " << _dim[2] << endl;
+			std::cout << "_dim[]  :" << _dim[0] << " " << _dim[1] << " " << _dim[2] << std::endl;
 	
-			real _aabb[] = { 0,tdims[0], 0,tdims[1], 0,tdims[2] };
+			real _aabb[] = { 0,real(tdims[0]), 0,real(tdims[1]), 0,real(tdims[2]) };
 
-			cout << "tdims[]  :" << tdims[0] << " " << tdims[1] << " " << tdims[2] << endl;
+			std::cout << "tdims[]  :" << tdims[0] << " " << tdims[1] << " " << tdims[2] << std::endl;
 
 			
 			ROI[0] =(float)cut[0]*((float)_dim[0] / (float)tdims[0]);
@@ -708,7 +710,7 @@ namespace optical_flow {
 			ROI[3] = (float)cut[3] * ((float)_dim[1] / (float)tdims[1]);
 			ROI[4] = (float)cut[4] * ((float)_dim[2] / (float)tdims[2]);
 			ROI[5] = (float)cut[5] * ((float)_dim[2] / (float)tdims[2]);
-			cout << "ROI: " << ROI[0] << " " << ROI[1] << " " << ROI[2] << " " << ROI[3] << " " << ROI[4] << " " << ROI[5] << " " << endl;
+			std::cout << "ROI: " << ROI[0] << " " << ROI[1] << " " << ROI[2] << " " << ROI[3] << " " << ROI[4] << " " << ROI[5] << " " << std::endl;
 
 			L1Huber_OF(_dim, Im1s[iscale], Im2s[iscale], inputVs[iscale],
 				inputY1s[iscale], inputY2s[iscale], inputY3s[iscale], inputY4s[iscale], _tol, _lambda, _maxIterations, _norm, _numberOfWarps, _aabb, _huber);

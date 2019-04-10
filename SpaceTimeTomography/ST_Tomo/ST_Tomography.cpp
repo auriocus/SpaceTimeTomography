@@ -5,11 +5,10 @@
 #include "TypicalRayProducer.h"
 #include "VolumeData.h"
 #include <iostream>
-#include <malloc.h>
 #include <stdlib.h>
 #include <string>
 #include "GL/glew.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <fstream>
 #include <time.h>
 #include <math.h>
@@ -25,9 +24,9 @@
 #include <ctime>        // std::time
 #include <cstdlib>      // std::rand, std::srand
 #include <string>
-#include<Eigen/Core>
+#include <Eigen/Core>
 #include <Eigen/Dense>
-#include<Eigen/SVD>
+#include <Eigen/SVD>
 #include <Eigen/Householder>
 #include <time.h> 
 
@@ -436,7 +435,7 @@ void ST_Tomography::Render()
 				int dim[] = { dimension[0], dimension[1], dimension[2] };
 
 				uvw = m_Data->m_Flowlist[iframe];//.get_resize(166, 124, 148, 3, 5) for testing;
-				const float aabb[] = { 0,dim[0], 0,dim[1], 0,dim[2] };
+				const float aabb[] = { 0,float(dim[0]), 0,float(dim[1]), 0,float(dim[2]) };
 
 				float eta = 0.65;  //downsample
 				float sigma = 0.5;  //blur 
@@ -841,7 +840,6 @@ void ST_Tomography::GetSize3D(float size[3])
 #include "TypicalRayProducer.core.h"
 #include <iostream>
 #include <stdio.h>
-#include <malloc.h>
 #include <stdlib.h>
 #include <string>
 using namespace std;

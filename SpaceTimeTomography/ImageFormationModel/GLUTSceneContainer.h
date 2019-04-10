@@ -3,7 +3,7 @@
 #ifndef GLUT_Scene_Container_h
 #define GLUT_Scene_Container_h
 
-#include "GL\glut.h"
+#include "GL/glut.h"
 
 class AbstractScene; 
 class GLUTSceneContainer

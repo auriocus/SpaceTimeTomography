@@ -59,7 +59,7 @@ int main(int argc,char** argv)
 		/* NULL entries were detected, some allocations m_must have failed */
 		printf("%s: insufficient memory\n",progname);
 		exitcode=1;
-		goto exit;
+		throw(std::runtime_error("Exit"));
 	}
 
 	/* set any command line default values prior to parsing */
@@ -107,7 +107,7 @@ int main(int argc,char** argv)
 		printf("(0b101101) formats. Suffixes KB, MB and GB are also accepted.\n");
 		arg_print_glossary(stdout,argtable,"  %-25s %s\n");
 		exitcode=0;
-		goto exit;
+		throw(std::runtime_error("Exit"));
 	}
 
 	/* special case: '--version' takes precedence error reporting */
@@ -116,7 +116,7 @@ int main(int argc,char** argv)
 		printf("'%s' example program for the \"argtable\" command line argument parser.\n",progname);
 		printf("September 2003, Stewart Heitmann\n");
 		exitcode=0;
-		goto exit;
+		throw(std::runtime_error("Exit"));
 	}
 
 	/* If the parser returned any errors then display them and exit */
@@ -126,7 +126,7 @@ int main(int argc,char** argv)
 		arg_print_errors(stdout,end,progname);
 		printf("Try '%s --help' for more information.\n",progname);
 		exitcode=1;
-		goto exit;
+		throw(std::runtime_error("Exit"));
 	}
 
 	/* special case: uname with no command line options induces brief help */
@@ -134,7 +134,7 @@ int main(int argc,char** argv)
 	{
 		printf("Try '%s --help' for more information.\n",progname);
 		exitcode=0;
-		goto exit;
+		throw(std::runtime_error("Exit"));
 	}
 
 	glutInit(&argc,argv);

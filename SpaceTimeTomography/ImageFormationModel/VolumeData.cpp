@@ -1,7 +1,7 @@
 ﻿// VolumeData.cpp
 
 #include "VolumeData.h"
-#include <malloc.h>
+#include <stdlib.h>
 #include <fstream>
 
 #include <iostream>
